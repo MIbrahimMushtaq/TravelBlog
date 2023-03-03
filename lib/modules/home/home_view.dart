@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (ctx,index){
                             final item = logic.listBlogs[index];
-                        return buildBlogHorizontalTile(bgImage:item.backgroundImage ,blogTitle:item.blogTitle,tileWidth: deviceWidth * 0.7 );
+                        return buildBlogHorizontalTile(bgImage:item.backgroundImage ,blogTitle:item.blogTitle,tileWidth: deviceWidth * 0.7 ,onTap:()=>logic.onIconTap(item) );
                       }),
 
                     ),
@@ -62,44 +62,45 @@ class HomeView extends StatelessWidget {
           );
         } );
   }
-  buildBlogHorizontalTile({String? bgImage,String? blogTitle,required double tileWidth,double? textSize}){
+  buildBlogHorizontalTile({String? bgImage,String? blogTitle,required double tileWidth,double? textSize,Function()? onTap}){
     return Stack(
       children: [
         Container(
           width: tileWidth,
           height: deviceHeight *0.32,
-          padding: EdgeInsets.symmetric(horizontal: Siz.standPadding , vertical:Siz.standPadding*1.2),
           margin: const EdgeInsets.only(right: 12),
           decoration: pBoxDecoration(
-            image: bgImage,
-            isAsset: false,
-            fit: BoxFit.cover,
             borderRadius: BorderRadius.circular(Siz.standMargin),
           ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children:  [
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(Siz.standMargin)
-                  ),
-                  child: Txt(blogTitle,hasBold: true,fontSize: textSize??20,maxLine: 3,textColor: Colors.white,overflow: TextOverflow.ellipsis,),
-
-                )
-
-              ],
-            ),
+          child: GetImage(
+            height: deviceHeight *0.32,
+            imagePath:bgImage,
+            fit: BoxFit.cover,
+            onTap: (){},
           ) ,
         ),
         Positioned(
+            bottom: deviceHeight *0.1,
+            left: 20,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              width: deviceWidth *0.58,
+              decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(Siz.standMargin)
+              ),
+              child: Txt(blogTitle,hasBold: true,fontSize: textSize??20,maxLine: 3,textColor: Colors.white,overflow: TextOverflow.ellipsis,),
+
+            )),
+        Positioned(
             bottom: 0,
             right: 26,
-            child: CircleAvatar(
-              backgroundColor: Clr.primaryColor,
-              child: const Icon(Icons.arrow_forward,color: Colors.white,),
+            child: GestureDetector(
+              onTap: onTap,
+              child: CircleAvatar(
+                backgroundColor: Clr.primaryColor,
+                child: const Icon(Icons.arrow_forward,color: Colors.white,),
+              ),
             ))
       ],
     );

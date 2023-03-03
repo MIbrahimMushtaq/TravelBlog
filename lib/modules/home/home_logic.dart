@@ -16,4 +16,8 @@ class HomeLogic extends GetxController{
   void onBlogTap(HomeModal item) {
     pSetRout(page: ()=>BlogDetailView(blogData: item,));
   }
+
+  void onIconTap(HomeModal item) {
+    pSetRout(page: ()=>BlogDetailView(blogData: item,));
+  }
 }

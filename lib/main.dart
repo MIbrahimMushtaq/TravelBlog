@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: S.appTitle,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Clr.primaryColor,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Clr.secondColor,
+          primary: Clr.primaryColor,
+        ),
       ),
       home: const SplashView(),
     );

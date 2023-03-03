@@ -22,9 +22,9 @@ class BlogDetailView extends StatelessWidget {
       return Material(
         child: Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: AppBar(title: const Txt('Blog Detail',hasBold:true),
+          appBar: AppBar(title: const Txt('Blog Detail',hasBold:true,textColor: Colors.white,),
           centerTitle: true,
-            iconTheme: const IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.white),
             elevation: 0,
             backgroundColor: Colors.transparent,
           ),
